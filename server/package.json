@@ -1,0 +1,25 @@
+{
+  "name": "rateme",
+  "version": "1.0.0",
+  "description": "R-A-T-E-M-E",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -e ts --exec \"npm run build\"",
+    "build": "ntsc && node dist/index.js"
+  },
+  "keywords": [
+    "rateme"
+  ],
+  "author": "rhogeranacleto@gmail.com",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mongoose": "^4.7.28",
+	"@types/node": "^8.0.57",
+	"@types/hapi": "^16.1.11"
+  },
+  "dependencies": {
+	"mongoose": "^4.13.6",
+	"hapi": "^16.1.0"
+  }
+}

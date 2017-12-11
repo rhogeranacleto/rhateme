@@ -1,1 +1,5 @@
-console.log('The rHateMe begins!');
+import { RHateMeServer } from './src/Server';
+import { dbConnect } from './src/Database';
+
+dbConnect();
+RHateMeServer.run();

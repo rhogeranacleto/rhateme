@@ -8,6 +8,11 @@ export function initUser(server: Server) {
 			method: 'GET',
 			path: '/users',
 			handler: UserMiddleware.getAll
+		},
+		{
+			method: 'GET',
+			path: '/user/{name}',
+			handler: UserMiddleware.getOne
 		}
 	];
 

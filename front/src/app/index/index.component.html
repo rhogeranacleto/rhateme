@@ -1,0 +1,5 @@
+<form [formGroup]="form">
+	<input placeholder="@" type="text" required [(ngModel)]="name" formControlName="name">
+	<button [disabled]="!form.valid" (click)="search()">Precura</button>
+</form>
+{{user?.username}}

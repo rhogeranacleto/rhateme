@@ -5,7 +5,10 @@ export interface INotes extends Document {
 }
 
 export interface IUser extends Document {
-	name: string;
+	username: string;
+	full_name: string;
+	profile_pic_url: string;
+	followed_by: number;
 	rate: number;
 	notes: INotes[];
 }
@@ -13,7 +16,7 @@ export interface IUser extends Document {
 export const NoteSchema = new Schema({
 	value: {
 		type: Number,
-		required: true
+		required: true,
 	}
 }, {
 		timestamps: true,
@@ -26,17 +29,24 @@ export const NoteSchema = new Schema({
 	});
 
 export const UserSchema = new Schema({
-	name: {
+	username: {
 		type: String,
-		required: true
+		required: true,
+		unique: true
 	},
+	full_name: String,
+	profile_pic_url: String,
+	followed_by: Number,
 	rate: {
 		type: Number,
 		default: 0
 	},
 	notes: [NoteSchema]
 }, {
-		timestamps: true,
+		timestamps: {
+			createdAt: 'created_at',
+			updatedAt: 'updated_at'
+		},
 		toObject: {
 			virtuals: true
 		},

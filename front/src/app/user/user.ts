@@ -1,10 +1,10 @@
 export interface IUser {
 	created_at: Date;
 	followed_by: Number;
-	full_name: String;
-	id: String;
-	profile_pic_url: String;
+	full_name: string;
+	id: string;
+	profile_pic_url: string;
 	rate: Number;
 	updated_at: Date;
-	username: String;
+	username: string;
 }

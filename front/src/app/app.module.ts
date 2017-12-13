@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IndexService } from './index/index.service';
 import { UserComponent } from './user/user.component';
 import { StartsRatingsComponent } from './starts-ratings/starts-ratings.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
 	declarations: [
@@ -29,7 +30,8 @@ import { StartsRatingsComponent } from './starts-ratings/starts-ratings.componen
 			useClass: Interceptor,
 			multi: true,
 		},
-		IndexService
+		IndexService,
+		UserService
 	],
 	bootstrap: [AppComponent]
 })

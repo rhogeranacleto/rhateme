@@ -21,4 +21,15 @@ export class UserMiddleware {
 			reply(err.message || 'erro interno').code(err.code || 500);
 		});
 	}
+
+	static addNoteToUser(request: Request, reply: ReplyNoContinue) {
+
+		UserController.addNoteToUser(request.params.id, request.payload.note).then(user => {
+
+				reply(user);
+		}).catch(err => {
+
+			reply(err.message || 'erro interno').code(err.code || 500);
+		});
+	}
 }

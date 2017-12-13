@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IUser } from './user';
+import { UserService } from './user.service';
 
 @Component({
 	selector: 'app-user',
@@ -10,13 +11,17 @@ export class UserComponent implements OnInit {
 
 	@Input() user: IUser;
 
-	constructor() { }
+	constructor(
+		private userService: UserService) { }
 
 	ngOnInit() {
 	}
 
 	rated(note: number) {
 
-		console.log(note);
+		this.userService.addNoteToUser(this.user.id, note).then(user => {
+
+			console.log(user);
+		});
 	}
 }

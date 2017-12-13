@@ -12,7 +12,7 @@ export class UserController {
 
 		return UserModel.findOne({
 			username
-		}).select('-notes').then(user => {
+		}).then(user => {// .select('-notes')
 
 			if (user) {
 
@@ -39,6 +39,26 @@ export class UserController {
 				profile_pic_url: user.profile_pic_url,
 				followed_by: user.followed_by.count
 			}).save();
+		});
+	}
+
+	static addNoteToUser(id: string, note: number) {
+
+		return UserModel.findById(id).then(user => {
+
+			if (user) {
+
+				user.notes.push({
+					value: note
+				});
+
+				return user.save();
+			}
+
+			throw {
+				code: 404,
+				message: 'Não econtrado'
+			};
 		});
 	}
 }

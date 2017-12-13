@@ -13,6 +13,11 @@ export function initUser(server: Server) {
 			method: 'GET',
 			path: '/user/{name}',
 			handler: UserMiddleware.getOne
+		},
+		{
+			method: 'PUT',
+			path: '/user/{id}/note',
+			handler: UserMiddleware.addNoteToUser
 		}
 	];
 

@@ -1,7 +1,10 @@
 import { Document, Schema, model } from 'mongoose';
 
-export interface INotes extends Document {
+export interface INotes {
 	value: number;
+	readonly created_at?: Date;
+	readonly updated_at?: Date;
+	readonly _id?: String;
 }
 
 export interface IUser extends Document {
@@ -11,6 +14,8 @@ export interface IUser extends Document {
 	followed_by: number;
 	rate: number;
 	notes: INotes[];
+	readonly created_at: Date;
+	readonly updated_at: Date;
 }
 
 export const NoteSchema = new Schema({
@@ -19,7 +24,10 @@ export const NoteSchema = new Schema({
 		required: true,
 	}
 }, {
-		timestamps: true,
+		timestamps: {
+			createdAt: 'created_at',
+			updatedAt: 'updated_at'
+		},
 		toObject: {
 			virtuals: true
 		},

@@ -15,4 +15,8 @@ export class UserComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	rated(note: number) {
+
+		console.log(note);
+	}
 }

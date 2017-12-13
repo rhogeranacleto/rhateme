@@ -1,6 +1,6 @@
 <p>
-	         {{user.full_name}}
+	{{user.full_name}}
 	<img [src]="user.profile_pic_url">
 </p>
 
-<app-starts-ratings></app-starts-ratings>
+<app-starts-ratings (call)="rated($event)" [userId]="user._id"></app-starts-ratings>

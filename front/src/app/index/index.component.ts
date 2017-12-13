@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { IndexService } from './index.service';
-import { User } from './user';
+import { IUser } from '../user/user';
 
 @Component({
 	selector: 'app-index',
@@ -14,7 +14,7 @@ export class IndexComponent implements OnInit {
 
 	name: string;
 
-	user: User;
+	user: IUser;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -34,6 +34,9 @@ export class IndexComponent implements OnInit {
 		return this.indexService.getUser(this.name).then(user => {
 
 			this.user = user;
+		}).catch(err => {
+
+			this.user = null;
 		});
 	}
 }

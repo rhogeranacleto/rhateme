@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from './user';
+import { IUser } from '../user/user';
 
 @Injectable()
 export class IndexService {
@@ -10,6 +10,6 @@ export class IndexService {
 
 	getUser(name: string) {
 
-		return this.http.get<User>('/user/' + name).toPromise();
+		return this.http.get<IUser>('/user/' + name).toPromise();
 	}
 }

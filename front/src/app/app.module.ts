@@ -7,11 +7,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Interceptor } from './interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IndexService } from './index/index.service';
+import { UserComponent } from './user/user.component';
+import { StartsRatingsComponent } from './starts-ratings/starts-ratings.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		IndexComponent
+		IndexComponent,
+		UserComponent,
+		StartsRatingsComponent
 	],
 	imports: [
 		BrowserModule,

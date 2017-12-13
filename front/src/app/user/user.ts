@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
 	created_at: Date;
 	followed_by: Number;
 	full_name: String;

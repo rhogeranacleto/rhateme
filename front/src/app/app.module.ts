@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
@@ -11,6 +12,18 @@ import { UserComponent } from './user/user.component';
 import { StartsRatingsComponent } from './starts-ratings/starts-ratings.component';
 import { UserService } from './user/user.service';
 import { RoundPipe } from './formats.pipe';
+
+const appRoutes: Routes = [
+	{
+		path: ':username',
+		component: IndexComponent
+	},
+	{
+		path: '',
+		pathMatch: 'full',
+		component: IndexComponent
+	}
+];
 
 @NgModule({
 	declarations: [
@@ -24,7 +37,10 @@ import { RoundPipe } from './formats.pipe';
 		BrowserModule,
 		FormsModule,
 		ReactiveFormsModule,
-		HttpClientModule
+		HttpClientModule,
+		RouterModule.forRoot(
+			appRoutes
+		)
 	],
 	providers: [
 		{

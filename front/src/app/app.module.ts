@@ -10,13 +10,15 @@ import { IndexService } from './index/index.service';
 import { UserComponent } from './user/user.component';
 import { StartsRatingsComponent } from './starts-ratings/starts-ratings.component';
 import { UserService } from './user/user.service';
+import { RoundPipe } from './formats.pipe';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		IndexComponent,
 		UserComponent,
-		StartsRatingsComponent
+		StartsRatingsComponent,
+		RoundPipe
 	],
 	imports: [
 		BrowserModule,

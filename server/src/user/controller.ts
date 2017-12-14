@@ -63,9 +63,8 @@ export class UserController {
 		}).then(user => {
 
 			// event.emit('new-note', user);
-			user.updateAverage();
 
-			return user;
+			return user.updateAverage();
 		});
 	}
 }

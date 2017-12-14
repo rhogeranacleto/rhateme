@@ -14,6 +14,7 @@ export interface IUser extends Document {
 	followed_by: number;
 	rate: number;
 	notes: INotes[];
+	count: number;
 	readonly created_at: Date;
 	readonly updated_at: Date;
 	updateAverage(): Promise<this>;
@@ -50,6 +51,10 @@ export const UserSchema = new Schema({
 		type: Number,
 		default: 0
 	},
+	count: {
+		type: Number,
+		default: 0
+	},
 	notes: [NoteSchema]
 }, {
 		timestamps: {
@@ -65,7 +70,12 @@ export const UserSchema = new Schema({
 	});
 
 interface IUserModel extends Model<IUser> {
-	getAverage(userId: string): Promise<number>;
+	getAverage(userId: string): Promise<IAverage>;
+}
+
+interface IAverage {
+	avg: number;
+	count: number;
 }
 
 class User {
@@ -76,18 +86,22 @@ class User {
 			_id: Types.ObjectId(userId)
 		}).group({
 			_id: '$_id',
-			avg: { $avg: '$notes.value' }
+			avg: {
+				$avg: '$notes.value'
+			},
+			count: { $sum: 1 }
 		}).limit(1).then(obj => {
 
-			return (<{ avg: number }>obj[0]).avg;
+			return (<IAverage>obj[0]);
 		});
 	}
 
 	updateAverage(this: IUser) {
 
-		return UserModel.getAverage(this._id).then(avg => {
+		return UserModel.getAverage(this._id).then(average => {
 
-			this.set('rate', avg);
+			this.set('rate', average.avg);
+			this.set('count', average.count);
 
 			return this.save();
 		});

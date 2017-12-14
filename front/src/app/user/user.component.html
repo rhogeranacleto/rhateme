@@ -1,7 +1,7 @@
 <p>
 	{{user.full_name}}
 	<img [src]="user.profile_pic_url">
-	{{user.rate | round:5}}
+	{{user.rate | round:5}} {{user.count}}
 </p>
 
 <app-starts-ratings (call)="rated($event)" [userId]="user._id"></app-starts-ratings>

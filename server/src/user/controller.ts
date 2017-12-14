@@ -1,11 +1,12 @@
-import { UserModel } from './model';
+import { UserModel, IUser } from './model';
 import { Instagram } from '../Instagram';
+// import { event } from '../Brain';
 
 export class UserController {
 
 	static getAll() {
 
-		return UserModel.find();
+		return UserModel.getAverage('5a316c396bb97148b5adddd9');
 	}
 
 	static getOne(username: string) {
@@ -42,7 +43,7 @@ export class UserController {
 		});
 	}
 
-	static addNoteToUser(id: string, note: number) {
+	static addNoteToUser(id: string, note: number): Promise<IUser> {
 
 		return UserModel.findById(id).then(user => {
 
@@ -59,6 +60,12 @@ export class UserController {
 				code: 404,
 				message: 'Não econtrado'
 			};
+		}).then(user => {
+
+			// event.emit('new-note', user);
+			user.updateAverage();
+
+			return user;
 		});
 	}
 }

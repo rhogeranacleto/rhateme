@@ -1,4 +1,4 @@
-import { Document, Schema, model } from 'mongoose';
+import { Document, Schema, model, Model, Types } from 'mongoose';
 
 export interface INotes {
 	value: number;
@@ -16,6 +16,7 @@ export interface IUser extends Document {
 	notes: INotes[];
 	readonly created_at: Date;
 	readonly updated_at: Date;
+	updateAverage(): Promise<this>;
 }
 
 export const NoteSchema = new Schema({
@@ -63,4 +64,36 @@ export const UserSchema = new Schema({
 		}
 	});
 
-export const UserModel = model<IUser>('User', UserSchema);
+interface IUserModel extends Model<IUser> {
+	getAverage(userId: string): Promise<number>;
+}
+
+class User {
+
+	static getAverage(userId: string) {
+
+		return UserModel.aggregate().unwind('$notes').match({
+			_id: Types.ObjectId(userId)
+		}).group({
+			_id: '$_id',
+			avg: { $avg: '$notes.value' }
+		}).limit(1).then(obj => {
+
+			return (<{ avg: number }>obj[0]).avg;
+		});
+	}
+
+	updateAverage(this: IUser) {
+
+		return UserModel.getAverage(this._id).then(avg => {
+
+			this.set('rate', avg);
+
+			return this.save();
+		});
+	}
+}
+
+UserSchema.loadClass(User);
+
+export const UserModel = model<IUser, IUserModel>('User', UserSchema);

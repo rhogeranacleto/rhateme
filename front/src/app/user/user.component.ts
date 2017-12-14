@@ -11,6 +11,8 @@ export class UserComponent implements OnInit {
 
 	@Input() user: IUser;
 
+	updatedUser: IUser;
+
 	constructor(
 		private userService: UserService) { }
 
@@ -21,7 +23,7 @@ export class UserComponent implements OnInit {
 
 		this.userService.addNoteToUser(this.user.id, note).then(user => {
 
-			console.log(user);
+			this.updatedUser = user;
 		});
 	}
 }

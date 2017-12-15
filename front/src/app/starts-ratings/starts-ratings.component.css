@@ -48,3 +48,7 @@ body h1 {
 .rating:not(:checked)>label:hover~label:before {
 	color: #F9DF4A;
 }
+
+.rating.block{
+	pointer-events: none;
+}

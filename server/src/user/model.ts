@@ -143,3 +143,5 @@ class User {
 UserSchema.loadClass(User);
 
 export const UserModel = model<IUser, IUserModel>('User', UserSchema);
+
+// db.users.find({},{username:1, rate:1, count:1}).sort({rate:-1, count: 1}).pretty()

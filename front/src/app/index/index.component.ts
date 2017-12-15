@@ -51,18 +51,11 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 		if (this.router.url.indexOf('#access_token') >= 0) {
 
-			this.instagramAuth(/.+#access_token=(.+)/.exec(this.router.url)[1]);
+			this.instagramAuth(/.+#access_token=(.+)/.exec(this.router.url)[1]).then(() => {
+
+				this.getData();
+			});
 		}
-
-		this.route.queryParams.subscribe(query => {
-
-			if (query['data']) {
-
-				const data = query['data'].split('+++');
-
-				this.setState(data[0], +data[1]);
-			}
-		});
 	}
 
 	getUser() {
@@ -83,11 +76,24 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 	instagramAuth(auth: string) {
 
-		this.indexService.auth(auth).then(user => {
+		return this.indexService.auth(auth).then(user => {
 
 			user.token = auth;
 
 			this.userService.sessionUser = user;
+		});
+	}
+
+	getData() {
+
+		this.route.queryParams.subscribe(query => {
+
+			if (query['data']) {
+
+				const data = query['data'].split('+++');
+
+				this.setState(data[0], +data[1]);
+			}
 		});
 	}
 

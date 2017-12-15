@@ -18,6 +18,11 @@ export class UserComponent implements OnInit {
 		private userService: UserService) { }
 
 	ngOnInit() {
+
+		if (this.note) {
+
+			this.rated(this.note);
+		}
 	}
 
 	rated(note: number) {

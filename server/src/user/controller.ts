@@ -44,14 +44,15 @@ export class UserController {
 		});
 	}
 
-	static addNoteToUser(id: string, note: number): Promise<IUser> {
+	static addNoteToUser(id: string, note: number, ownerId: string): Promise<IUser> {
 
 		return UserModel.findById(id).then(user => {
 
 			if (user) {
 
 				user.notes.push({
-					value: note
+					value: note,
+					owner_id: ownerId
 				});
 
 				return user.save();

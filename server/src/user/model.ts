@@ -2,6 +2,7 @@ import { Document, Schema, model, Model, Types } from 'mongoose';
 
 export interface INotes {
 	value: number;
+	owner_id: string;
 	readonly created_at?: Date;
 	readonly updated_at?: Date;
 	readonly _id?: String;
@@ -25,7 +26,8 @@ export const NoteSchema = new Schema({
 	value: {
 		type: Number,
 		required: true,
-	}
+	},
+	owner_id: Schema.Types.ObjectId
 }, {
 		timestamps: {
 			createdAt: 'created_at',

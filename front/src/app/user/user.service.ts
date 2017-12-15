@@ -26,7 +26,8 @@ export class UserService {
 	addNoteToUser(id: string, note: number) {
 
 		return this.http.put<IUser>(`/user/${id}/note`, {
-			note
+			note,
+			owner: this.sessionUser.id
 		}).toPromise();
 	}
 }

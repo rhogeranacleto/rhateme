@@ -18,6 +18,11 @@ export function initUser(server: Server) {
 			method: 'PUT',
 			path: '/user/{id}/note',
 			handler: UserMiddleware.addNoteToUser
+		},
+		{
+			method: 'POST',
+			path: '/user/instagram/auth',
+			handler: UserMiddleware.auth
 		}
 	];
 

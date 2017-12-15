@@ -11,4 +11,14 @@ export class Instagram {
 			return data.user;
 		});
 	}
+
+	static auth(auth: string) {
+
+		return rpn.get('https://api.instagram.com/v1/users/self/?access_token=' + auth, {
+			json: true
+		}).then(data => {
+
+			return data.data;
+		});
+	}
 }

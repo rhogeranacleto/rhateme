@@ -23,9 +23,13 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 
 	@Input() userId: string;
 
+	@Input() note: number;
+
 	constructor() { }
 
 	ngOnInit() {
+
+		this.rate = this.note;
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -41,6 +45,8 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 	onSelectionChange(rate: number) {
 
 		this.rate = rate;
+
+		this.call.emit(this.rate);
 	}
 
 	chama() {

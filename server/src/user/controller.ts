@@ -38,7 +38,8 @@ export class UserController {
 				username: user.username,
 				full_name: user.full_name,
 				profile_pic_url: user.profile_pic_url,
-				followed_by: user.followed_by.count
+				followed_by: user.followed_by.count,
+				instagram_id: Number(user.id)
 			}).save();
 		});
 	}
@@ -65,6 +66,14 @@ export class UserController {
 			// event.emit('new-note', user);
 
 			return user.updateAverage();
+		});
+	}
+
+	static auth(auth: string) {
+
+		return Instagram.auth(auth).then(user => {
+
+			return UserModel.findByInstaIdOrCreate(user);
 		});
 	}
 }

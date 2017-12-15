@@ -2,4 +2,5 @@
 	<input placeholder="@" type="text" required [(ngModel)]="name" formControlName="name">
 	<button [disabled]="!form.valid" (click)="search()">Precura</button>
 </form>
-<app-user *ngIf="user" [user]="user"></app-user>
+<app-user *ngIf="user" [user]="user" [note]="note"></app-user>
+nota {{note}}

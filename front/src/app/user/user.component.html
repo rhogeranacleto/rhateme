@@ -4,4 +4,4 @@
 	{{user.rate | round:5}} {{user.count}}
 </p>
 
-<app-starts-ratings (call)="rated($event)" [userId]="user._id"></app-starts-ratings>
+<app-starts-ratings (call)="rated($event)" [userId]="user._id" [note]="note"></app-starts-ratings>

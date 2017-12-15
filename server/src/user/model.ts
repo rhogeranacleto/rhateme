@@ -15,6 +15,7 @@ export interface IUser extends Document {
 	rate: number;
 	notes: INotes[];
 	count: number;
+	instagram_id: number;
 	readonly created_at: Date;
 	readonly updated_at: Date;
 	updateAverage(): Promise<this>;
@@ -47,6 +48,10 @@ export const UserSchema = new Schema({
 	full_name: String,
 	profile_pic_url: String,
 	followed_by: Number,
+	instagram_id: {
+		type: Number,
+		required: true
+	},
 	rate: {
 		type: Number,
 		default: 0
@@ -69,8 +74,15 @@ export const UserSchema = new Schema({
 		}
 	});
 
+export interface IInstagramUser {
+	id: string;
+	username: string;
+	full_name: string;
+	profile_picture: string;
+}
 interface IUserModel extends Model<IUser> {
 	getAverage(userId: string): Promise<IAverage>;
+	findByInstaIdOrCreate(instaUser: IInstagramUser): Promise<IUser>;
 }
 
 interface IAverage {
@@ -93,6 +105,26 @@ class User {
 		}).limit(1).then(obj => {
 
 			return (<IAverage>obj[0]);
+		});
+	}
+
+	static findByInstaIdOrCreate(instaUser: IInstagramUser) {
+
+		return UserModel.findOne({
+			instagram_id: Number(instaUser.id)
+		}).then(user => {
+
+			if (user) {
+
+				return user;
+			}
+
+			return UserModel.create({
+				instagram_id: Number(instaUser.id),
+				username: instaUser.username,
+				full_name: instaUser.full_name,
+				profile_pic_url: instaUser.profile_picture
+			});
 		});
 	}
 

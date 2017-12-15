@@ -1,4 +1,5 @@
 export interface IUser {
+	token: string;
 	created_at: Date;
 	followed_by: Number;
 	full_name: string;

@@ -32,4 +32,15 @@ export class UserMiddleware {
 			reply(err.message || 'erro interno').code(err.code || 500);
 		});
 	}
+
+	static auth(request: Request, reply: ReplyNoContinue) {
+
+		UserController.auth(request.payload.auth).then(user => {
+
+				reply(user);
+		}).catch(err => {
+
+			reply(err.message || 'erro interno').code(err.code || 500);
+		});
+	}
 }

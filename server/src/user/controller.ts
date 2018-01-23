@@ -52,7 +52,8 @@ export class UserController {
 
 				user.notes.push({
 					value: note,
-					owner_id: ownerId
+					owner_id: ownerId,
+					weight: user.rate
 				});
 
 				return user.save();

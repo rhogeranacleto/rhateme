@@ -9,7 +9,7 @@ export function dbConnect(): IDatabase {
 
 	(<any>Mongoose).Promise = global.Promise;
 
-	Mongoose.connect(process.env.DB || 'mongodb://localhost:27017/rhateme', {
+	Mongoose.connect(process.env.DB || 'mongodb://root:root@ds111258.mlab.com:11258/rhateme', {
 		useMongoClient: true
 	});
 

@@ -3,6 +3,7 @@ import { Document, Schema, model, Model, Types } from 'mongoose';
 export interface INotes {
 	value: number;
 	owner_id: string;
+	weight: number;
 	readonly created_at?: Date;
 	readonly updated_at?: Date;
 	readonly _id?: String;
@@ -24,6 +25,10 @@ export interface IUser extends Document {
 
 export const NoteSchema = new Schema({
 	value: {
+		type: Number,
+		required: true,
+	},
+	weight: {
 		type: Number,
 		required: true,
 	},

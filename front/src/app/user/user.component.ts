@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
 			});
 		} else {
 
-			const redirect = `http://localhost:4220?data=${this.user.username}+++${note}`;
+			const redirect = `http://localhost:4200?data=${this.user.username}+++${note}`;
 
 			window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=0cbd3e97ae9049a0aad3ea7ce155c0f9&redirect_uri=${redirect}&response_type=token`;
 		}

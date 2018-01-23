@@ -24,6 +24,11 @@ export class UserController {
 		});
 	}
 
+	static note(id: any) {
+
+		return UserModel.getAverage(id);
+	}
+
 	private static findUserInstagram(username: string) {
 
 		return Instagram.searchUser(username).catch(err => {
@@ -46,14 +51,20 @@ export class UserController {
 
 	static addNoteToUser(id: string, note: number, ownerId: string): Promise<IUser> {
 
-		return UserModel.findById(id).then(user => {
+		return Promise.all([
+			UserModel.findById(id).then(u => u),
+			UserModel.findById(ownerId).then(u => u)
+		]).then((data: [IUser | null, IUser | null]) => {
 
-			if (user) {
+			let user = data[0];
+			let owner = data[1];
+
+			if (user && owner) {
 
 				user.notes.push({
 					value: note,
 					owner_id: ownerId,
-					weight: user.rate
+					weight: owner.rate
 				});
 
 				return user.save();

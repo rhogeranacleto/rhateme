@@ -105,12 +105,14 @@ class User {
 			_id: Types.ObjectId(userId)
 		}).group({
 			_id: '$_id',
-			avg: {
-				$avg: '$notes.value'
-			},
-			count: { $sum: 1 }
+			count: { $sum: 1 },
+			numerator: { $sum: { $multiply: ["$notes.value", "$notes.weight"] } },
+			denominator: { $sum: "$notes.weight" }
+		}).project({
+			avg: { $divide: ['$numerator', '$denominator'] },
+			count: '$count'
 		}).limit(1).then(obj => {
-
+			console.log(obj)
 			return (<IAverage>obj[0]);
 		});
 	}

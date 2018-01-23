@@ -26,9 +26,9 @@ export class UserMiddleware {
 
 		UserController.addNoteToUser(request.params.id, request.payload.note, request.payload.owner).then(user => {
 
-				reply(user);
+			reply(user);
 		}).catch(err => {
-
+			console.log(err);
 			reply(err.message || 'erro interno').code(err.code || 500);
 		});
 	}
@@ -37,7 +37,18 @@ export class UserMiddleware {
 
 		UserController.auth(request.payload.auth).then(user => {
 
-				reply(user);
+			reply(user);
+		}).catch(err => {
+
+			reply(err.message || 'erro interno').code(err.code || 500);
+		});
+	}
+
+	static note(request: Request, reply: ReplyNoContinue) {
+
+		UserController.note(request.params.id).then(user => {
+
+			reply(user);
 		}).catch(err => {
 
 			reply(err.message || 'erro interno').code(err.code || 500);

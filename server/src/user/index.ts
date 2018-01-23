@@ -23,6 +23,11 @@ export function initUser(server: Server) {
 			method: 'POST',
 			path: '/user/instagram/auth',
 			handler: UserMiddleware.auth
+		},
+		{
+			method: 'GET',
+			path: '/user/{id}/note',
+			handler: UserMiddleware.note
 		}
 	];
 

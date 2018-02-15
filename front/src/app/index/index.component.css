@@ -1,0 +1,84 @@
+.bg {
+	height: 110%;
+	position: fixed;
+	z-index: -1;
+	width: 110%;
+	left: -30px;
+	top: -16px;
+	background-size: cover;
+	background-position: center;
+	filter: blur(16px) brightness(0.6);
+	transition: all ease 1s;
+}
+
+.search-form {
+	padding: 12px;
+	/* background-color: rgb(50, 170, 46); */
+	display: flex;
+	justify-content: center;
+}
+
+.search-form>.content {
+	width: 80%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	/* box-shadow: 0px 1px 4px #4c4c4c; */
+	font-size: 20px;
+	color: #fff;
+}
+
+.search-button,
+.search-input {
+	border: 1px solid #fff;
+}
+
+.search-input {
+	background-color: #00000042;
+	padding: 8px;
+	flex: 1;
+	height: 30px;
+	font-size: inherit;
+	color: inherit;
+}
+
+.search-button {
+	background: #F9DF4A;
+	color: #484848;
+	border-left-style: none;
+	font-size: inherit;
+	font-weight: bold;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+
+#user {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#user .cover img {
+	border-radius: 50%;
+	width: 200px;
+}
+
+#user .user-name {
+	color: #fff;
+	font-size: 40px;
+	margin: 15px;
+}
+
+#user .user-rate {
+	color: #fff;
+}
+
+#user .user-rate .rate-count {
+	font-size: 25px;
+}
+
+#user .user-rate .rate-avg {
+	font-size: 60px;
+	margin: 12px;
+}

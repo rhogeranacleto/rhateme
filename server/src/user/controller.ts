@@ -43,6 +43,7 @@ export class UserController {
 				username: user.username,
 				full_name: user.full_name,
 				profile_pic_url: user.profile_pic_url,
+				profile_pic_url_hd: user.profile_pic_url_hd,
 				followed_by: user.followed_by.count,
 				instagram_id: Number(user.id)
 			}).save();
@@ -55,7 +56,7 @@ export class UserController {
 			UserModel.findById(id).then(u => u),
 			UserModel.findById(ownerId).then(u => u)
 		]).then((data: [IUser | null, IUser | null]) => {
-
+			console.log(data);
 			let user = data[0];
 			let owner = data[1];
 
@@ -64,7 +65,7 @@ export class UserController {
 				user.notes.push({
 					value: note,
 					owner_id: ownerId,
-					weight: owner.rate
+					weight: owner.rate || 1
 				});
 
 				return user.save();

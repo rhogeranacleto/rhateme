@@ -1,7 +1,7 @@
 <p>
-	{{user.full_name}}
-	<img [src]="user.profile_pic_url">
-	{{user.rate | round:5}} {{user.count}}
+	{{user?.full_name}}
+	<img *ngIf="user" [src]="user.profile_pic_url">
+	<span class="odometer" id="note"></span> {{user?.rate | round:5}}
 </p>
 
-<app-starts-ratings (call)="rated($event)" [userId]="user._id" [note]="note"></app-starts-ratings>
+<app-starts-ratings (call)="rated($event)" [userId]="user?._id" [note]="note"></app-starts-ratings>

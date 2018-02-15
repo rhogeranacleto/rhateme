@@ -1,6 +1,21 @@
-<form [formGroup]="form">
-	<input placeholder="@" type="text" required [(ngModel)]="name" formControlName="name">
-	<button [disabled]="!form.valid" (click)="search()">Precura</button>
+<div class="bg" [ngStyle]="{'background-image': 'url(' + background + ')'}"></div>
+<form [formGroup]="form" class="search-form">
+	<div class="content">
+		<input placeholder="@" type="text" required [(ngModel)]="name" formControlName="name" class="search-input">
+		<button [disabled]="!form.valid" (click)="search()" class="search-button">RHATE</button>
+	</div>
 </form>
-<app-user *ngIf="user" [user]="user" [note]="note"></app-user>
-nota {{note}}
+<div id="user">
+	<div class="cover">
+		<img *ngIf="user" [src]="user.profile_pic_url_hd">
+	</div>
+	<h2 class="user-name">
+		{{user?.full_name}}
+	</h2>
+	<div class="user-rate">
+		<h1 class="odometer rate-avg" id="note"></h1><span class="rate-count">/<span class="odometer" id="noteCount"></span></span>
+	</div>
+	<div class="stars">
+		<app-starts-ratings *ngIf="user" (call)="rated($event)" [userId]="user._id" [note]="note"></app-starts-ratings>
+	</div>
+</div>

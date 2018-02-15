@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../user/user.service';
 import { Location } from '@angular/common';
+import { RoundPipe } from '../formats.pipe';
 
 @Component({
 	selector: 'app-index',
@@ -20,7 +21,25 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 	paramSubscribe: Subscription;
 
-	user: IUser;
+	user?: IUser;
+
+	set _user(user: IUser) {
+
+		this.user = user;
+
+		document.getElementById('note').innerText = new RoundPipe().transform(user ? user.rate : 0, 3);
+		document.getElementById('noteCount').innerText = (user ? user.count : 0).toString();
+	}
+
+	get background() {
+
+		if (this.user && this.user.profile_pic_url_hd) {
+
+			return this.user.profile_pic_url_hd;
+		}
+
+		return 'https://media.istockphoto.com/photos/abstract-network-connection-background-picture-id509731276?k=6&m=509731276&s=612x612&w=0&h=C8_3Gb8V7DHKZnO1BP-BHYKYfTvxxqJAM29OtvaC7Qs=';
+	}
 
 	note: number;
 
@@ -62,11 +81,27 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 		return this.indexService.getUser(this.name).then(user => {
 
-			this.user = user;
+			this._user = user;
 		}).catch(err => {
 
-			this.user = null;
+			this._user = null;
 		});
+	}
+
+	rated(note: number) {
+
+		if (this.userService.isLogged) {
+
+			this.userService.addNoteToUser(this.user.id, note).then(user => {
+
+				this._user = user;
+			});
+		} else {
+
+			const redirect = `http://localhost:4200?data=${this.user.username}+++${note}`;
+
+			window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=0cbd3e97ae9049a0aad3ea7ce155c0f9&redirect_uri=${redirect}&response_type=token`;
+		}
 	}
 
 	search() {

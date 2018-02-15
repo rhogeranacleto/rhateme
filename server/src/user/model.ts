@@ -13,6 +13,7 @@ export interface IUser extends Document {
 	username: string;
 	full_name: string;
 	profile_pic_url: string;
+	profile_pic_url_hd: string;
 	followed_by: number;
 	rate: number;
 	notes: INotes[];
@@ -54,6 +55,7 @@ export const UserSchema = new Schema({
 	},
 	full_name: String,
 	profile_pic_url: String,
+	profile_pic_url_hd: String,
 	followed_by: Number,
 	instagram_id: {
 		type: Number,

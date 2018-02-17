@@ -5,12 +5,18 @@
 	"main": "index.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "nodemon -e ts --exec \"npm run build\"",
-		"build": "ntsc && node dist/index.js"
+		"start": "node dist/index.js",
+		"postinstall": "ntsc",
+		"build": "ntsc && node dist/index.js",
+		"dev": "nodemon -e ts --exec \"npm run build\"",
+		"publishheroku": "cd ../ && git subtree push --prefix server rhateme-api master || true"
 	},
 	"keywords": [
-		"rateme"
+		"rate", "hate"
 	],
+	"engines": {
+		"node": "6.11.3"
+	},
 	"author": "rhogeranacleto@gmail.com",
 	"license": "ISC",
 	"devDependencies": {

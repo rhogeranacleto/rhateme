@@ -19,17 +19,15 @@
 	},
 	"author": "rhogeranacleto@gmail.com",
 	"license": "ISC",
-	"devDependencies": {
-		"@types/mongoose": "^4.7.28",
-		"@types/node": "^8.0.57",
-		"@types/hapi": "^16.1.11",
-		"@types/request-promise-native": "^1.0.10"
-	},
 	"dependencies": {
 		"mongoose": "^4.13.6",
 		"hapi": "^16.1.0",
 		"request-promise-native": "^1.0.5",
 		"request": "^2.34",
-		"ntypescript": "^1.201706190042.1"
+		"ntypescript": "^1.201706190042.1",
+		"@types/mongoose": "^4.7.28",
+		"@types/node": "^8.0.57",
+		"@types/hapi": "^16.1.11",
+		"@types/request-promise-native": "^1.0.10"
 	}
 }

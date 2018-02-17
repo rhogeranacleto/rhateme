@@ -6,27 +6,27 @@ export function initUser(server: Server) {
 	const userRoutes: RouteConfiguration[] = [
 		{
 			method: 'GET',
-			path: '/users',
+			path: '/api/users',
 			handler: UserMiddleware.getAll
 		},
 		{
 			method: 'GET',
-			path: '/user/{name}',
+			path: '/api/user/{name}',
 			handler: UserMiddleware.getOne
 		},
 		{
 			method: 'PUT',
-			path: '/user/{id}/note',
+			path: '/api/user/{id}/note',
 			handler: UserMiddleware.addNoteToUser
 		},
 		{
 			method: 'POST',
-			path: '/user/instagram/auth',
+			path: '/api/user/instagram/auth',
 			handler: UserMiddleware.auth
 		},
 		{
 			method: 'GET',
-			path: '/user/{id}/note',
+			path: '/api/user/{id}/note',
 			handler: UserMiddleware.note
 		}
 	];

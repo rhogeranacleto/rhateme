@@ -73,6 +73,7 @@
 	justify-content: space-around;
 	flex: 1;
 	padding: 20px 0;
+	color: #fff;
 }
 
 #user .cover img {
@@ -81,14 +82,14 @@
 }
 
 #user .user-name {
-	color: #fff;
 	font-size: 40px;
 	margin: 0 15px;
 	text-align: center;
 }
 
 #user .user-rate {
-	color: #fff;
+	display: flex;
+	align-items: center;
 }
 
 #user .user-rate .rate-count {

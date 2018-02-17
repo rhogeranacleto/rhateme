@@ -1,5 +1,6 @@
 import { Server } from 'hapi';
 import { initUser } from './user/index';
+import * as Path from 'path';
 
 export class RHateMeServer {
 
@@ -10,24 +11,36 @@ export class RHateMeServer {
 		server.connection({
 			port: 8080,
 			routes: {
-				cors: true
+				cors: true,
+				files: {
+					relativeTo: Path.join(__dirname, '../../angular')
+				}
 			}
 		});
 
-		server.route({
-			method: 'GET',
-			path: '/',
-			handler: function (request, reply) {
+		server.register(require('inert')).then(() => {
 
-				reply('Olar');
-			}
-		});
+			initUser(server);
 
-		initUser(server);
+			server.route({
+				method: 'GET',
+				path: '/{param*}',
+				handler: {
+					directory: {
+						path: '.',
+						redirectToSlash: true,
+						index: true,
+					}
+				}
+			});
 
-		return server.start().then(() => {
+			return server.start()
+		}).then(() => {
 
 			console.log('HE IS ALIVE! 🤖');
+		}).catch(e => {
+
+			console.log('Errror', e);
 		});
 	}
 }

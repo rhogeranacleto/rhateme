@@ -20,9 +20,10 @@
 		"@types/request-promise-native": "^1.0.10"
 	},
 	"dependencies": {
-		"mongoose": "^4.13.6",
 		"hapi": "^16.1.0",
-		"request-promise-native": "^1.0.5",
-		"request": "^2.34"
+		"inert": "^4.x.x",
+		"mongoose": "^4.13.6",
+		"request": "^2.34",
+		"request-promise-native": "^1.0.5"
 	}
 }

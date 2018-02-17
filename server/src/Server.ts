@@ -8,7 +8,7 @@ export class RHateMeServer {
 		const server = new Server();
 
 		server.connection({
-			port: 8080,
+			port: process.env.PORT || 8080,
 			routes: {
 				cors: true
 			}

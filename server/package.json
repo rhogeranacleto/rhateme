@@ -29,6 +29,7 @@
 		"mongoose": "^4.13.6",
 		"hapi": "^16.1.0",
 		"request-promise-native": "^1.0.5",
-		"request": "^2.34"
+		"request": "^2.34",
+		"ntypescript": "^1.201706190042.1"
 	}
 }

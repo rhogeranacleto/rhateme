@@ -12,6 +12,9 @@
 		"deploy": "cd ../ && git subtree push --prefix front rhateme master || true"
 	},
 	"private": true,
+	"engines": {
+		"node": "6.11.3"
+	},
 	"dependencies": {
 		"@angular-devkit/core": "0.0.28",
 		"@angular/animations": "^5.0.0",

@@ -89,6 +89,8 @@
 
 #user .user-rate {
 	color: #fff;
+	display: flex;
+	align-items: center;
 }
 
 #user .user-rate .rate-count {

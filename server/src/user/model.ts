@@ -114,7 +114,7 @@ class User {
 			avg: { $divide: ['$numerator', '$denominator'] },
 			count: '$count'
 		}).limit(1).then(obj => {
-			console.log(obj)
+
 			return (<IAverage>obj[0]);
 		});
 	}

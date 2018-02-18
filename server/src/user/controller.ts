@@ -56,7 +56,7 @@ export class UserController {
 			UserModel.findById(id).then(u => u),
 			UserModel.findById(ownerId).then(u => u)
 		]).then((data: [IUser | null, IUser | null]) => {
-			console.log(data);
+
 			let user = data[0];
 			let owner = data[1];
 

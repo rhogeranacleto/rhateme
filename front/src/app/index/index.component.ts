@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../user/user.service';
 import { Location } from '@angular/common';
 import { RoundPipe } from '../formats.pipe';
+import { environment } from '../../environments/environment';
 
 @Component({
 	selector: 'app-index',
@@ -98,7 +99,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 			});
 		} else {
 
-			const redirect = `http://localhost:4200?data=${this.user.username}+++${note}`;
+			const redirect = `${environment.redirect}?data=${this.user.username}+++${note}`;
 
 			window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=0cbd3e97ae9049a0aad3ea7ce155c0f9&redirect_uri=${redirect}&response_type=token`;
 		}

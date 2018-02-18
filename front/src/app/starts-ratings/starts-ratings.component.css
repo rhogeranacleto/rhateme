@@ -58,3 +58,9 @@ body h1 {
 	text-align: center;
 	color: #fff;
 }
+
+@media screen and (max-device-height:460px) {
+	.rating-content {
+		display: none;
+	}
+}

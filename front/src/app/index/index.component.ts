@@ -19,7 +19,17 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 	form: FormGroup;
 
-	name: string;
+	get name() {
+
+		return this._name.toLowerCase();
+	}
+
+	set name(name: string) {
+
+		this._name = name;
+	}
+
+	_name: string;
 
 	paramSubscribe: Subscription;
 

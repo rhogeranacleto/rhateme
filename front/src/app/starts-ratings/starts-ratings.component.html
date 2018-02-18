@@ -1,12 +1,17 @@
-<div class="rating" [class.block]="rate">
-	<input type="radio" id="star5" name="rating" value="5" [checked]="rate == 5" (change)="onSelectionChange(5)" />
-	<label for="star5"></label>
-	<input type="radio" id="star4" name="rating" value="4" [checked]="rate == 4" (change)="onSelectionChange(4)" />
-	<label for="star4"></label>
-	<input type="radio" id="star3" name="rating" value="3" [checked]="rate == 3" (change)="onSelectionChange(3)" />
-	<label for="star3"></label>
-	<input type="radio" id="star2" name="rating" value="2" [checked]="rate == 2" (change)="onSelectionChange(2)" />
-	<label for="star2"></label>
-	<input type="radio" id="star1" name="rating" value="1" [checked]="rate == 1" (change)="onSelectionChange(1)" />
-	<label for="star1"></label>
+<div class="rating-content" [class.block]="rate">
+	<div class="rating">
+		<input type="radio" id="star5" name="rating" value="5" [checked]="rate == 5" (change)="onSelectionChange(5)" />
+		<label for="star5"></label>
+		<input type="radio" id="star4" name="rating" value="4" [checked]="rate == 4" (change)="onSelectionChange(4)" />
+		<label for="star4"></label>
+		<input type="radio" id="star3" name="rating" value="3" [checked]="rate == 3" (change)="onSelectionChange(3)" />
+		<label for="star3"></label>
+		<input type="radio" id="star2" name="rating" value="2" [checked]="rate == 2" (change)="onSelectionChange(2)" />
+		<label for="star2"></label>
+		<input type="radio" id="star1" name="rating" value="1" [checked]="rate == 1" (change)="onSelectionChange(1)" />
+		<label for="star1"></label>
+	</div>
+	<div class="message" *ngIf="ever">
+		You already given {{ever}} stars today
+	</div>
 </div>

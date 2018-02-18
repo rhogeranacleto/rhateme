@@ -25,6 +25,8 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 
 	@Input() note: number;
 
+	@Input() ever?: number;
+
 	constructor() { }
 
 	ngOnInit() {
@@ -35,10 +37,22 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 	ngOnChanges(changes: SimpleChanges) {
 
 		const userId: SimpleChange = changes.userId;
+		const ever: SimpleChange = changes.ever;
 
-		if (userId.previousValue !== userId.currentValue) {
+		if (userId) {
 
-			this.rate = null;
+			if (userId.previousValue !== userId.currentValue) {
+
+				this.rate = null;
+			}
+		}
+
+		if (ever) {
+
+			if (ever.currentValue) {
+
+				this.rate = this.ever;
+			}
 		}
 	}
 

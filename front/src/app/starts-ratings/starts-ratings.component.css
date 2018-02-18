@@ -11,11 +11,14 @@ body h1 {
 	text-align: center;
 }
 
-.rating {
+.rating-content {
 	margin: 0 auto;
-	padding: 30px 41px;
+	padding: 30px 40px;
 	border: 1px solid #CCCCCC;
 	background: #ffffff30;
+}
+
+.rating {
 	display: flex;
 	flex-direction: row-reverse;
 }
@@ -49,4 +52,9 @@ body h1 {
 
 .rating.block {
 	pointer-events: none;
+}
+
+.message {
+	text-align: center;
+	color: #fff;
 }

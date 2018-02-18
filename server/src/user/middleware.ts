@@ -28,7 +28,7 @@ export class UserMiddleware {
 
 			reply(user);
 		}).catch(err => {
-			console.log(err);
+
 			reply(err.message || 'erro interno').code(err.code || 500);
 		});
 	}

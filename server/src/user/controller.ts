@@ -1,4 +1,4 @@
-import { UserModel, IUser } from './model';
+import { UserModel, IUser, INote } from './model';
 import { Instagram } from '../Instagram';
 // import { event } from '../Brain';
 
@@ -54,11 +54,21 @@ export class UserController {
 
 		return Promise.all([
 			UserModel.findById(id).then(u => u),
-			UserModel.findById(ownerId).then(u => u)
-		]).then((data: [IUser | null, IUser | null]) => {
+			UserModel.findById(ownerId).then(u => u),
+			UserModel.findLastRateOfUser(id, ownerId)
+		]).then((data: [IUser | null, IUser | null, INote | null]) => {
 
-			let user = data[0];
-			let owner = data[1];
+			const user = data[0];
+			const owner = data[1];
+			const todayNote = data[2];
+
+			if (todayNote) {
+
+				throw {
+					code: 405,
+					message: todayNote.value
+				}
+			}
 
 			if (user && owner) {
 
@@ -73,7 +83,7 @@ export class UserController {
 
 			throw {
 				code: 404,
-				message: 'Não econtrado'
+				message: 'Not found'
 			};
 		}).then(user => {
 

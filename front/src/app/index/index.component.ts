@@ -8,6 +8,7 @@ import { UserService } from '../user/user.service';
 import { Location } from '@angular/common';
 import { RoundPipe } from '../formats.pipe';
 import { environment } from '../../environments/environment';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
 	selector: 'app-index',
@@ -43,6 +44,8 @@ export class IndexComponent implements OnInit, OnDestroy {
 	}
 
 	note: number;
+
+	ever?: number;
 
 	constructor(
 		private formBuilder: FormBuilder,
@@ -83,6 +86,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 		return this.indexService.getUser(this.name).then(user => {
 
 			this._user = user;
+			this.ever = null;
 		}).catch(err => {
 
 			this._user = null;
@@ -96,6 +100,12 @@ export class IndexComponent implements OnInit, OnDestroy {
 			this.userService.addNoteToUser(this.user.id, note).then(user => {
 
 				this._user = user;
+			}).catch((err: HttpErrorResponse) => {
+
+				if (err.status === 405) {
+
+					this.ever = err.error;
+				}
 			});
 		} else {
 

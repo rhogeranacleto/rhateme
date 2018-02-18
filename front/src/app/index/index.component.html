@@ -17,7 +17,7 @@
 			<h1 class="odometer rate-avg" id="note"></h1><span class="rate-count">/<span class="odometer" id="noteCount"></span></span>
 		</div>
 		<div class="stars">
-			<app-starts-ratings *ngIf="user" (call)="rated($event)" [userId]="user._id" [note]="note"></app-starts-ratings>
+			<app-starts-ratings *ngIf="user" (call)="rated($event)" [userId]="user._id" [note]="note" [ever]="ever"></app-starts-ratings>
 		</div>
 	</div>
 </div>

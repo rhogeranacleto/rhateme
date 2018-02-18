@@ -1,6 +1,7 @@
 import { Document, Schema, model, Model, Types } from 'mongoose';
+import * as moment from 'moment';
 
-export interface INotes {
+export interface INote {
 	value: number;
 	owner_id: string;
 	weight: number;
@@ -16,7 +17,7 @@ export interface IUser extends Document {
 	profile_pic_url_hd: string;
 	followed_by: number;
 	rate: number;
-	notes: INotes[];
+	notes: INote[];
 	count: number;
 	instagram_id: number;
 	readonly created_at: Date;
@@ -92,6 +93,7 @@ export interface IInstagramUser {
 interface IUserModel extends Model<IUser> {
 	getAverage(userId: string): Promise<IAverage>;
 	findByInstaIdOrCreate(instaUser: IInstagramUser): Promise<IUser>;
+	findLastRateOfUser(id: string, owner_id: string): Promise<INote | null>;
 }
 
 interface IAverage {
@@ -117,6 +119,31 @@ class User {
 
 			return (<IAverage>obj[0]);
 		});
+	}
+
+	static findLastRateOfUser(_id: string, owner_id: string) {
+
+		return UserModel.findOne({
+			_id,
+			'notes.owner_id': owner_id,
+			'notes.created_at': {
+				$lt: moment().add(1, 'd').startOf('d').toDate(),
+				$gte: moment().startOf('d').toDate()
+			}
+		}, {
+				notes: {
+					$elemMatch: {
+						owner_id,
+						created_at: {
+							$lt: moment().add(1, 'd').startOf('d').toDate(),
+							$gte: moment().startOf('d').toDate()
+						}
+					}
+				}
+			}).then(u => {
+
+				return u ? u.notes[0] : null;
+			});
 	}
 
 	static findByInstaIdOrCreate(instaUser: IInstagramUser) {

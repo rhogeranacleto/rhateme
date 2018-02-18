@@ -21,7 +21,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 	get name() {
 
-		return this._name.toLowerCase();
+		return (this._name || '').toLowerCase();
 	}
 
 	set name(name: string) {

@@ -9,7 +9,7 @@
 		"postinstall": "ntsc",
 		"build": "ntsc && node dist/index.js",
 		"dev": "nodemon -e ts --exec \"npm run build\"",
-		"publishheroku": "cd ../ && git subtree push --prefix server rhateme-api master || true"
+		"deploy": "cd ../ && git subtree push --prefix server rhateme-api master || true"
 	},
 	"keywords": [
 		"rate", "hate"

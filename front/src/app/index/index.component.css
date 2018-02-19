@@ -80,6 +80,7 @@
 	font-size: 40px;
 	margin: 0 15px;
 	text-align: center;
+	white-space: nowrap;
 }
 
 #user .user-rate {
@@ -101,10 +102,13 @@
 	.search-form>.content {
 		width: 100%;
 	}
-}
-
-@media screen and (max-device-height:380px) {
+	#user .user-name {
+		font-size: 30px;
+	}
 	#user .cover img {
 		max-height: 130px;
+	}
+	#user .user-rate .rate-avg {
+		font-size: 40px;
 	}
 }

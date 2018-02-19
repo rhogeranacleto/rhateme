@@ -150,7 +150,7 @@ class User {
 
 		return UserModel.findOne({
 			instagram_id: Number(instaUser.id)
-		}).then(user => {
+		}).select('-notes').then(user => {
 
 			if (user) {
 

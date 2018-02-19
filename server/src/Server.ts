@@ -19,7 +19,7 @@ export class RHateMeServer {
 			path: '/',
 			handler: function (request, reply) {
 
-				reply('Olar');
+				reply('what you doing here?');
 			}
 		});
 

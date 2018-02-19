@@ -158,9 +158,11 @@ export class IndexComponent implements OnInit, OnDestroy {
 		this.name = username;
 		this.location.go('/' + this.name);
 
-		this.getUser();
+		this.getUser().then(() => {
 
-		this.note = note;
+			this.note = note;
+			this.rated(note);
+		});
 	}
 
 	ngOnDestroy(): void {

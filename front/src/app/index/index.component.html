@@ -2,7 +2,7 @@
 <div class="body">
 	<form [formGroup]="form" class="search-form">
 		<div class="content">
-			<input placeholder="@" type="text" required [(ngModel)]="name" formControlName="name" class="search-input">
+			<input placeholder="@" type="search" required [(ngModel)]="name" formControlName="name" class="search-input">
 			<button [disabled]="!form.valid" (click)="search()" class="search-button">RHATE</button>
 		</div>
 	</form>

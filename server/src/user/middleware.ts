@@ -1,5 +1,6 @@
 import { Request, ReplyNoContinue } from 'hapi';
 import { UserController } from './controller';
+import { IUser } from './model';
 
 export class UserMiddleware {
 
@@ -24,7 +25,9 @@ export class UserMiddleware {
 
 	static addNoteToUser(request: Request, reply: ReplyNoContinue) {
 
-		UserController.addNoteToUser(request.params.id, request.payload.note, request.auth.credentials.id).then(user => {
+		const user: IUser = request.auth.credentials
+
+		UserController.addNoteToUser(request.params.id, request.payload.note, user.id, user.rate).then(user => {
 
 			reply(user);
 		}).catch(err => {

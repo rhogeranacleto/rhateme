@@ -87,7 +87,7 @@ export const UserSchema = new Schema({
 interface IUserModel extends Model<IUser> {
 	getAverage(userId: string): Promise<IAverage>;
 	findByInstaIdOrCreate(instaUser: IInstagramUser): Promise<IUser>;
-	findLastRateOfUser(id: string, owner_id: string): Promise<INote | null>;
+	findLastRateOfUser(id: string, owner_id: string, hourTime: number): Promise<INote | null>;
 }
 
 interface IAverage {
@@ -115,22 +115,20 @@ class User {
 		});
 	}
 
-	static findLastRateOfUser(_id: string, owner_id: string) {
+	static findLastRateOfUser(_id: string, owner_id: string, hourTime: number) {
 
 		return UserModel.findOne({
 			_id,
 			'notes.owner_id': owner_id,
 			'notes.created_at': {
-				$lt: moment().add(1, 'd').startOf('d').toDate(),
-				$gte: moment().startOf('d').toDate()
+				$gte: moment().add(-hourTime, 'h').toDate()
 			}
 		}, {
 				notes: {
 					$elemMatch: {
 						owner_id,
 						created_at: {
-							$lt: moment().add(1, 'd').startOf('d').toDate(),
-							$gte: moment().startOf('d').toDate()
+							$gte: moment().add(-hourTime, 'h').toDate()
 						}
 					}
 				}

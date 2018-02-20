@@ -49,12 +49,12 @@ export class UserController {
 		});
 	}
 
-	static addNoteToUser(id: string, note: number, ownerId: string): Promise<IUser> {
+	static addNoteToUser(id: string, note: number, ownerId: string, hourTime: number): Promise<IUser> {
 
 		return Promise.all([
 			UserModel.findById(id).then(u => u),
 			UserModel.findById(ownerId).then(u => u),
-			UserModel.findLastRateOfUser(id, ownerId)
+			UserModel.findLastRateOfUser(id, ownerId, hourTime)
 		]).then((data: [IUser | null, IUser | null, INote | null]) => {
 
 			const user = data[0];

@@ -8,6 +8,7 @@ import {
 	Input,
 	SimpleChange
 } from '@angular/core';
+import { UserService } from '../user/user.service';
 
 @Component({
 	selector: 'app-starts-ratings',
@@ -26,6 +27,8 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 	@Input() note: number;
 
 	@Input() ever?: number;
+
+	hourTime: string;
 
 	constructor() { }
 
@@ -51,6 +54,7 @@ export class StartsRatingsComponent implements OnInit, OnChanges {
 
 			if (ever.currentValue) {
 
+				this.hourTime = UserService.sessionUser.rate.toFixed(2);
 				this.rate = this.ever;
 			}
 		}

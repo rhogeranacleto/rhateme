@@ -5,7 +5,7 @@ import { Instagram } from "./Instagram";
 export function Authenticate(req: Request, id: string, token: string, next: (e: any | null, isValid: boolean, user?: any) => void) {
 
 	return Promise.all([
-		UserModel.findById(id).exec(),
+		UserModel.findById(id).select('-notes').exec(),
 		Instagram.auth(token)
 	]).then(data => {
 

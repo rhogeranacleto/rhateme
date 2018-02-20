@@ -1,5 +1,6 @@
 import { Document, Schema, model, Model, Types } from 'mongoose';
 import * as moment from 'moment';
+import { IInstagramUser } from '../Instagram';
 
 export interface INote {
 	value: number;
@@ -13,13 +14,12 @@ export interface INote {
 export interface IUser extends Document {
 	username: string;
 	full_name: string;
-	profile_pic_url: string;
 	profile_pic_url_hd: string;
 	followed_by: number;
 	rate: number;
 	notes: INote[];
 	count: number;
-	instagram_id: number;
+	instagram_id: string;
 	readonly created_at: Date;
 	readonly updated_at: Date;
 	updateAverage(): Promise<this>;
@@ -59,7 +59,7 @@ export const UserSchema = new Schema({
 	profile_pic_url_hd: String,
 	followed_by: Number,
 	instagram_id: {
-		type: Number,
+		type: String,
 		required: true
 	},
 	rate: {
@@ -84,12 +84,6 @@ export const UserSchema = new Schema({
 		}
 	});
 
-export interface IInstagramUser {
-	id: string;
-	username: string;
-	full_name: string;
-	profile_picture: string;
-}
 interface IUserModel extends Model<IUser> {
 	getAverage(userId: string): Promise<IAverage>;
 	findByInstaIdOrCreate(instaUser: IInstagramUser): Promise<IUser>;
@@ -149,19 +143,22 @@ class User {
 	static findByInstaIdOrCreate(instaUser: IInstagramUser) {
 
 		return UserModel.findOne({
-			instagram_id: Number(instaUser.id)
+			instagram_id: instaUser.id
 		}).select('-notes').then(user => {
 
 			if (user) {
 
-				return user;
+				user.full_name = instaUser.full_name;
+				user.profile_pic_url_hd = instaUser.profile_pic_url_hd;
+
+				return user.save();
 			}
 
 			return UserModel.create({
-				instagram_id: Number(instaUser.id),
+				instagram_id: instaUser.id,
 				username: instaUser.username,
 				full_name: instaUser.full_name,
-				profile_pic_url: instaUser.profile_picture
+				profile_pic_url_hd: instaUser.profile_pic_url_hd
 			});
 		});
 	}

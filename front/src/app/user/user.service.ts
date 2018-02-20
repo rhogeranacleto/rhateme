@@ -8,17 +8,17 @@ export class UserService {
 	constructor(
 		private http: HttpClient) { }
 
-	get sessionUser(): IUser {
+	static get sessionUser(): IUser {
 
 		return JSON.parse(sessionStorage.getItem('sessionUser'));
 	}
 
-	set sessionUser(user: IUser) {
+	static set sessionUser(user: IUser) {
 
 		sessionStorage.setItem('sessionUser', JSON.stringify(user));
 	}
 
-	get isLogged(): boolean {
+	static get isLogged(): boolean {
 
 		return !!this.sessionUser;
 	}
@@ -27,7 +27,12 @@ export class UserService {
 
 		return this.http.put<IUser>(`/user/${id}/note`, {
 			note,
-			owner: this.sessionUser.id
+			owner: UserService.sessionUser.id
 		}).toPromise();
+	}
+
+	cleanSession() {
+
+		sessionStorage.removeItem('sessionUser');
 	}
 }

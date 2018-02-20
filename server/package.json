@@ -25,11 +25,13 @@
 		"@types/mongoose": "^4.7.28",
 		"@types/node": "^8.0.57",
 		"@types/request-promise-native": "^1.0.10",
+		"@types/hapi-auth-basic": "^4.0.3",
 		"hapi": "^16.1.0",
 		"moment": "^2.20.1",
 		"mongoose": "^4.13.6",
 		"ntypescript": "^1.201706190042.1",
 		"request": "^2.34",
-		"request-promise-native": "^1.0.5"
+		"request-promise-native": "^1.0.5",
+		"hapi-auth-basic": "^4.0.0"
 	}
 }

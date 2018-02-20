@@ -105,12 +105,19 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 	rated(note: number) {
 
-		if (this.userService.isLogged) {
+		if (UserService.isLogged) {
 
 			this.userService.addNoteToUser(this.user.id, note).then(user => {
 
 				this._user = user;
 			}).catch((err: HttpErrorResponse) => {
+
+				if (err.error.text === 'token_expired') {
+
+					this.userService.cleanSession();
+
+					return this.rated(note);
+				}
 
 				if (err.status === 405) {
 
@@ -136,7 +143,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 			user.token = auth;
 
-			this.userService.sessionUser = user;
+			UserService.sessionUser = user;
 		});
 	}
 

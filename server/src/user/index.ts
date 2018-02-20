@@ -7,22 +7,32 @@ export function initUser(server: Server) {
 		{
 			method: 'GET',
 			path: '/users',
-			handler: UserMiddleware.getAll
+			config: {
+				handler: UserMiddleware.getAll
+			}
 		},
 		{
 			method: 'GET',
 			path: '/user/{name}',
-			handler: UserMiddleware.getOne
+			config: {
+				handler: UserMiddleware.getOne
+			}
 		},
 		{
 			method: 'PUT',
 			path: '/user/{id}/note',
-			handler: UserMiddleware.addNoteToUser
+			config: {
+				handler: UserMiddleware.addNoteToUser,
+				auth: 'simple'
+			}
 		},
 		{
 			method: 'POST',
 			path: '/user/instagram/auth',
-			handler: UserMiddleware.auth
+			config: {
+				handler: UserMiddleware.auth,
+				auth: false
+			}
 		},
 		{
 			method: 'GET',

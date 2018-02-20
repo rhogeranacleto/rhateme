@@ -1,5 +1,7 @@
 import { Server } from 'hapi';
 import { initUser } from './user/index';
+import * as HapiBasicAuth from 'hapi-auth-basic';
+import { Authenticate } from './Auth';
 
 export class RHateMeServer {
 
@@ -14,20 +16,33 @@ export class RHateMeServer {
 			}
 		});
 
-		server.route({
-			method: 'GET',
-			path: '/',
-			handler: function (request, reply) {
+		server.register(HapiBasicAuth, function (err) {
 
-				reply('what you doing here?');
+			if (err) {
+
+				console.log('error', 'failed to install plugins')
+				throw err
 			}
-		});
 
-		initUser(server);
+			server.auth.strategy('simple', 'basic', {
+				validateFunc: Authenticate
+			});
 
-		return server.start().then(() => {
+			server.route({
+				method: 'GET',
+				path: '/',
+				handler: function (request, reply) {
 
-			console.log('HE IS ALIVE! 🤖');
+					reply('what you doing here?');
+				}
+			});
+
+			initUser(server);
+
+			return server.start().then(() => {
+
+				console.log('HE IS ALIVE! 🤖');
+			});
 		});
 	}
 }

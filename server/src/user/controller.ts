@@ -42,9 +42,8 @@ export class UserController {
 			return new UserModel({
 				username: user.username,
 				full_name: user.full_name,
-				profile_pic_url: user.profile_pic_url,
 				profile_pic_url_hd: user.profile_pic_url_hd,
-				followed_by: user.followed_by.count,
+				// followed_by: user.followed_by.count,
 				instagram_id: Number(user.id)
 			}).save();
 		});
@@ -97,7 +96,10 @@ export class UserController {
 
 		return Instagram.auth(auth).then(user => {
 
-			return UserModel.findByInstaIdOrCreate(user);
+			return Instagram.searchUser(user.username);
+		}).then(instagramUser => {
+
+			return UserModel.findByInstaIdOrCreate(instagramUser);
 		});
 	}
 }

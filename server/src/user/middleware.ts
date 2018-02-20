@@ -24,7 +24,7 @@ export class UserMiddleware {
 
 	static addNoteToUser(request: Request, reply: ReplyNoContinue) {
 
-		UserController.addNoteToUser(request.params.id, request.payload.note, request.payload.owner).then(user => {
+		UserController.addNoteToUser(request.params.id, request.payload.note, request.auth.credentials.id).then(user => {
 
 			reply(user);
 		}).catch(err => {

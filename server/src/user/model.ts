@@ -104,8 +104,8 @@ class User {
 		}).group({
 			_id: '$_id',
 			count: { $sum: 1 },
-			numerator: { $sum: { $multiply: ["$notes.value", "$notes.weight"] } },
-			denominator: { $sum: "$notes.weight" }
+			numerator: { $sum: { $multiply: ['$notes.value', '$notes.weight'] } },
+			denominator: { $sum: '$notes.weight' }
 		}).project({
 			avg: { $divide: ['$numerator', '$denominator'] },
 			count: '$count'

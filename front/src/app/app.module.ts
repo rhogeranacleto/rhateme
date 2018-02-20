@@ -13,6 +13,9 @@ import { StartsRatingsComponent } from './starts-ratings/starts-ratings.componen
 import { UserService } from './user/user.service';
 import { RoundPipe } from './formats.pipe';
 
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+
 const appRoutes: Routes = [
 	{
 		path: ':username',
@@ -40,7 +43,8 @@ const appRoutes: Routes = [
 		HttpClientModule,
 		RouterModule.forRoot(
 			appRoutes
-		)
+		),
+		ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
 	],
 	providers: [
 		{

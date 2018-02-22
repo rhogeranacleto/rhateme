@@ -128,7 +128,7 @@ export class IndexComponent implements OnInit, OnDestroy {
 
 			const redirect = `${environment.redirect}?data=${this.user.username}+++${note}`;
 
-			window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=0cbd3e97ae9049a0aad3ea7ce155c0f9&redirect_uri=${redirect}&response_type=token`;
+			window.location.replace(`https://api.instagram.com/oauth/authorize/?client_id=0cbd3e97ae9049a0aad3ea7ce155c0f9&redirect_uri=${redirect}&response_type=token`);
 		}
 	}
 
